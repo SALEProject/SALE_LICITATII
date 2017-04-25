@@ -1,0 +1,58 @@
+<div class="tile m-b-10 data-container procedure-item" id="procedure-detail-container" style="display:none">
+	<div class="tile-title">
+		<h5 class="no-margin m-b-10 bold"><span id="detail-name" class="procedure-name"></span></h5>
+		<br/>
+	</div>
+	<div class="tile-body">
+		<div class="row procedure-details-holder">
+			<div class="col-md-5">
+				<p id="detail-description" class="procedure-description"></p>
+				<div id="detail-documents" class="procedure-documents"></div>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-2">
+						<span id="detail-type" class="procedure-type"></span>
+					</div>
+					<div class="col-md-2">
+						<a id="detail-favourite" class="procedure-favourite" data-title="<%- req.session.getTranslation('Add_favorite') %>" data-title-added="<%- req.session.getTranslation('Remove_favorite') %>"></a>
+					</div>
+					<div class="col-md-2">
+						<span id="detail-status" class="procedure-status"></span>
+					</div>
+					<div class="col-md-6">
+						<p class="procedure-time"><%- req.session.getTranslation('Launch') %><span id="detail-launch" class="procedure-launch"></span></p>
+						<p class="procedure-time"><%- req.session.getTranslation('Clarifications_until') %><span id="detail-clarifications" class="procedure-clarifications"></span></p>
+						<p class="procedure-time"><%- req.session.getTranslation('Submit_deadline') %><span id="detail-deadline" class="procedure-deadline"></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+    <div class="js-clarification-request-container col-md-6 col-xs-12" style="display: none;">
+      <div class="tile-title">
+        <h5 class="no-margin m-b-10 bold"><span class="procedure-name"><%- req.session.getTranslation('Clarification_request') %></span></h5>
+        <br />
+      </div>
+      <div class="tile-body">
+        <input type="file" name="doc" id="js-clarification-file" />
+        <input type="button" class="btn btn-success btn-cons js-clarification-start-upload" value="<%- req.session.getTranslation('Submit') %>" />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="js-offer-container col-md-6 col-xs-12">
+      <div class="tile-title">
+        <h5 class="no-margin m-b-10 bold"><span class="procedure-name"><%- req.session.getTranslation('Offer') %></span></h5>
+        <br />
+      </div>
+      <div class="tile-body">
+        <input type="file" name="offer_doc" id="js-offer-file" />
+        <input type="text" name="offer_price" class="js-offer-input" data-field="Price" placeholder="<%- req.session.getTranslation('Price') %>" /><br /><br />
+        <input type="text" name="offer_deadline" class="js-offer-input" data-field="Deadline" placeholder="<%- req.session.getTranslation('Delivery_deadline') %>" /><br /><br />
+        <input type="button" class="btn btn-success btn-cons js-offer-start-upload" value="<%- req.session.getTranslation('Submit') %>" />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+	</div>
+</div>

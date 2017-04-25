@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta charset="utf-8" />
+    <title><%- title %></title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<!-- BEGIN CORE CSS FRAMEWORK -->
+	<link href="/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/plugins/jquery-date-range-picker/daterangepicker.css" rel="stylesheet" type="text/css" />
+	<link href="/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+	<link href="/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
+  <link href="/plugins/uploadify/uploadify.css" rel="stylesheet" type="text/css"/>
+	<!-- END CORE CSS FRAMEWORK -->
+	<!-- BEGIN CSS TEMPLATE -->
+	<link href="/css/style.css?_t=<%= Date.now() %>" rel="stylesheet" type="text/css"/>
+	<link href="/css/responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+	<!-- END CSS TEMPLATE -->
+
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+	<!-- BEGIN BODY -->
+	<body class="error-body no-top wide">
+		<%- partial('partials/header') %>
+
+		<!-- BEGIN CONTAINER -->
+		<div class="container wide">
+			<div class="page-container row-fluid">
+				<div class="page-content">
+					<div class="content">
+						<%- body %>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- END CONTAINER -->
+<script>
+var b_id =<%= req.session.currentUser.ID_Broker %>;
+var a_id =<%= req.session.currentUser.ID_Agency %>;
+var c_id =<%= req.session.currentUser.ID_Client %>;
+var currentLang = '<%- req.session.lang.code %>';
+var showLogs = <%- sails.config.environment=='development' ? 'true' : 'false' %>;
+var tableElement;
+var cpvs = {
+<% if(typeof req.session.cpvs != 'undefined') { for(var i=0;i<req.session.cpvs.length;i++) { %>
+<%- req.session.cpvs[i].ID %>: <%- sails.util.inspect(req.session.cpvs[i]) %><%- i<req.session.cpvs.length ? ',' : '' %>
+<% }} %>
+};
+var procedureTypes = {
+<% if(typeof req.session.procedureTypes != 'undefined') { for(var i=0;i<req.session.procedureTypes.length;i++) { %>
+<%- req.session.procedureTypes[i].ID %> : <%- sails.util.inspect(req.session.procedureTypes[i]) %><%- i<req.session.cpvs.length ? ',' : '' %>
+<% }}  %>
+};
+</script>
+	<script src="/dictionary.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+	<script src="/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/socket.io.js"></script>
+
+	<!-- BEGIN CORE JS FRAMEWORK-->
+	<script src="/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+	<script src="/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="/plugins/bootstrap-select2/select2.min.js" type="text/javascript"></script>
+	<script src="/js/moment-with-locales.js" type="text/javascript"></script>
+	<script src="/plugins/jquery-autonumeric/autoNumeric.js"></script>
+	<script src="/plugins/jquery.number.min.js"></script>
+	<script src="/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+	<script src="/plugins/jquery-date-range-picker/jquery.daterangepicker.js" type="text/javascript"></script>
+	<script src="/plugins/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+	<!-- BEGIN CORE TEMPLATE JS -->
+<script>
+var startDateOffset = new moment().add('days',<%= sails.storage.market.StartDeliveryDateOffset %>);
+var startDate = new Date(startDateOffset.format());
+var endDateOffset = new moment().add('days',<%= sails.storage.market.EndDeliveryDateOffset %>);
+var endDate = new Date(endDateOffset.format());
+var whitelist = [<%- req.session.whitelist %>];
+</script>
+	<script src="/js/core.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/parts/procedures.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/parts/favourites.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/parts/chat.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/parts/time.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/parts/alerts.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/parts/notifications.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/parts/users.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/parts/journal.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script src="/js/app.js?_t=<%= Date.now() %>" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/sails.io.js"></script>
+	<!-- END CORE TEMPLATE JS -->
+
+    </body>
+</html>

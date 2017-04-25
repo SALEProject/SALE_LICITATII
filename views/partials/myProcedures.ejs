@@ -1,0 +1,25 @@
+<%
+var my_procedures_prototype = '<li id="my-procedure-__ID__" class="procedure-item">' +
+		'<a class="view-procedure" data-id="__ID__"><span class="procedure-name">__NAME__</span><span class="procedure-status __STATUS__" title="__STATUS__">&nbsp;</span></a>' +
+		'<a class="delete-procedure" data-id="__ID__" href="/procedure/delete/__ID__">' + req.session.getTranslation('Cancel_procedure') + '</a>' +
+	'</li>';
+%>
+<div class="procedures" id="my-procedures-container">
+	<div class="tile m-b-10">
+		<div class="tile-title">
+			<div class="controller">
+				<a href="" class="collapse pull-right m-l-15">&nbsp;</a>
+			</div>
+			<h4 id="my-procedures-title" class="m-t-0"><%- req.session.getTranslation('My_procedures') %></h3>
+		</div>
+		<div class="tile-body">
+			<div class="text-center padding-20 loader"><img src="/img/loader-white.gif"></div>
+			<div id="my-procedures-scroller" class="scroller" data-height="300px">
+				<ul class="procedures-list" id="my-procedures-list" data-prototype="<%= my_procedures_prototype %>">
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+			<a class="btn btn-primary btn-small" id="generate-procedure"><%- req.session.getTranslation('Generate_procedure') %></a>
+		</div>
+	</div>
+</div>

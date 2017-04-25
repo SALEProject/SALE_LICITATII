@@ -1,0 +1,52 @@
+<!-- BEGIN HEADER -->
+<div class="header navbar navbar-inverse wide">
+	<div class="container">
+		<div class="top-section pull-left" id="logo-box">
+			<a href="/"><img src="/img/logo.png" class="logo" alt=""  data-src="/img/logo.png" width="60" height="60"/></a>
+			<div id="time-container"><span class="server-time" class=""></span></div>
+		</div>
+		<div class="top-section pull-left" id="stats-box">
+			<div class="" id="alerts-container">
+				<div class="scroller" id="alerts-scroller" data-height="70">
+					<ul id="alerts-list">
+						<li class="empty-message"><%- req.session.getTranslation('no_recent_alert') %></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="top-section pull-left" id="menu-box">
+			<ul class="nav second-menu">
+				<li class="">
+					<a class=""><i class="icon-custom-chart"></i>&nbsp;&nbsp;<%- req.session.getTranslation('About_SALE') %></a>
+				</li>
+				<li class="">
+					<a class=""><i class="fa fa-align-right"></i>&nbsp;&nbsp;<%- req.session.getTranslation('Links') %></a>
+				</li>
+				<li class="">
+					<a class=""><i class="fa fa-bookmark"></i>&nbsp;&nbsp;<%- req.session.getTranslation('Technical_requests') %></a>
+				</li>
+				<li class="">
+					<a class=""><i class="fa fa-th-large"></i>&nbsp;&nbsp;<%- req.session.getTranslation('Help') %></a>
+				</li>
+			</ul>
+		</div>
+		<div class="top-section pull-left" id="account-box">
+			<p class="account-header"><span class="muted"><%- req.session.getTranslation('Logged_in_as') %></span></p>
+			<p class="user-info"><strong><% if(req.session.currentUser.FirstName && req.session.currentUser.LastName) { %><%- req.session.currentUser.FirstName %> <%- req.session.currentUser.LastName %><% } else { %><%- req.session.currentUser.LoginName %><% } %></strong><br/><span class="italic"><%- req.session.currentUser.ID_Agency!=-1 ? req.session.currentUser.CompanyName : req.session.currentUser.role.Name %></span></p>
+
+			<% if(req.session.currentUser.isAdministrator) { %>
+			<div class="user-data-box">
+				<br/><a href="/admin"><i class="fa fa-gears"></i> Mergi la administrare</a>
+			</div>
+			<% } %>
+			<p class="user-account-link"><a href="/account"><i class="fa fa-user"></i> <strong>Contul meu</strong></a> | <a class="" href="/logout" title="Logout"><%- req.session.getTranslation('Logout') %></a></p>
+		</div>
+	</div>
+</div>
+<p style="
+    text-align: center;
+    margin: 0px;
+    margin-left: 5%;
+    font-size: 12px;
+">Ver 1.3.1 2016.09.29</p>
+<!-- END HEADER -->

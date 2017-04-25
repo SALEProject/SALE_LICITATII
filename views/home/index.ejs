@@ -1,0 +1,29 @@
+<div class="row m-b-10">	 
+	<div class="col-md-3 col-sm-3">
+		<a class="btn btn-success" id="show-procedures"><%- req.session.getTranslation('View_all_procedures') %></a>
+		<% if(accessService.checkState('dashboard','dashboard_myprocedures',req)) { %>
+			<%- partial('../partials/myProcedures') %>
+		<% } %>
+		<% if(accessService.checkState('dashboard','dashboard_favorites',req)) { %>
+			<%- partial('../partials/favourites') %>
+		<% } %>
+		<% if(accessService.checkState('dashboard','dashboard_journal',req) || accessService.checkState('dashboard','dashboard_anre',req) || accessService.checkState('dashboard','dashboard_users',req)) { %>
+			<%- partial('../partials/users') %>
+		<% } %>
+		<% if(accessService.checkState('dashboard','dashboard_chat',req)) { %>
+			<%- partial('../partials/chat') %>
+		<% } %>
+	</div>
+	<div class="col-md-9 col-sm-9">
+		<% if(accessService.checkState('dashboard','dashboard_procedures',req)) { %>
+			<%- partial('../partials/procedures') %>
+		<% } %>
+		<% if(accessService.checkState('dashboard','dashboard_procedures',req)) { %>
+			<%- partial('../partials/procedureDetail') %>
+		<% } %>
+		<% if(accessService.checkState('dashboard','dashboard_myprocedures',req)) { %>
+			<%- partial('../partials/procedureForm') %>
+		<% } %>
+	</div>
+</div>
+

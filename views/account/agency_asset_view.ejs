@@ -1,0 +1,320 @@
+<div class="tile white m-b-10 padding-20">
+	<div class="tile-title">
+		<h3 class="m-t-0 m-b-10"><%= title %></h4>
+		<%- toolsService.getFlashMessage(req.flash()) %>
+	</div>
+	<div class="tile-body p-t-20">
+		<div class="account-form">
+            <div class="row column-seperation">
+                <div class="col-md-6">
+					<div class="row m-b-10">
+		                <div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Asset_name') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?req.session.getFieldTranslation(item,'AssetName'):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Asset_status') %></h5>
+		                </div>
+		                <div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.Visibility:'') %></strong>
+		                </div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Asset_description') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?req.session.getFieldTranslation(item,'AssetDescription'):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Ring_name') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?req.session.getFieldTranslation(item,'RingName'):'') %></strong>
+						</div>
+					</div>
+		            <div class="row m-b-10">
+		                <div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Ring_status') %></h5>
+		                </div>
+		                <div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?(item.RingActive?'Activ':'Inactiv'):'') %></strong>
+		                </div>
+		            </div>
+		            <div class="row m-b-10">
+		                <div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Asset_type_name') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?req.session.getFieldTranslation(item,'AssetTypeName'):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Asset_type_description') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?req.session.getFieldTranslation(item,'AssetTypeDescription'):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Client_name') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.ClientName:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Agency_name') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.AgencyName:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Procedure_type') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?((item.ID_InitialOrder == 0) ? req.session.getTranslation('Double_competitive') : req.session.getTranslation('Simple_competitive')):'') %></strong>
+						</div>
+					</div>                
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 clas="no-margin"><%- req.session.getTranslation('Availability') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.ExpirationDate:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Currency') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?req.session.getFieldTranslation(item,'Currency'):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Payment_currency') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?req.session.getFieldTranslation(item,'PaymentCurrency'):'') %></strong>
+						</div>
+					</div>            
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Measuring_unit') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?req.session.getFieldTranslation(item,'MeasuringUnit'):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Spot_contract') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?(item.isSpotContract ? req.session.getTranslation('Yes') : req.session.getTranslation('No')):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Spot_quotation') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?((item.SpotQuotation == 0)? '':item.SpotQuotation):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Quantity') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.Quantity:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Quantity_stepping') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.QuantityStepping:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Min_quantity') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.MinQuantity:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Total_partial') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?(item.PartialFlag ? req.session.getTranslation('Partial') : req.session.getTranslation('Total')):'') %></strong>
+						</div>
+					</div>
+				</div>		            
+				<div class="col-md-6">		                
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Price') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.Price:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Price_stepping') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.PriceStepping:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Min_price') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.MinPrice:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Max_price') %></h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.MaxPrice:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Sell_warranty_percent') %> (%)</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.SellWarrantyPercent:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Sell_warranty_by_mu') %> (RON)</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.SellWarrantyMU:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Sell_warranty_fixed') %> (RON)</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.SellWarrantyFixed:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Buy_warranty_percent') %> (%)</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.BuyWarrantyPercent:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Buy_warranty_by_mu') %> (RON)</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.BuyWarrantyMU:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Buy_warranty_fixed') %> (RON)</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.BuyWarrantyFixed:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin">DeltaT</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.DeltaT:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin">DeltaT1</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.DeltaT1:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Electronic_session') %>:</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?(item.isElectronicSession ? req.session.getTranslation('Yes') : req.session.getTranslation('No')):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin"><%- req.session.getTranslation('Automatic_start') %>:</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?(item.launchAutomatically?req.session.getTranslation('Yes'):req.session.getTranslation('No')):'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin">T0</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.PreOpeningTime:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 for="OpeningTime">T1</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.OpeningTime:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 for="PreClosingTime">T2</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.PreClosingTime:'') %></strong>
+						</div>
+					</div>
+					<div class="row m-b-10 p-l-20">
+						<div class="col-md-5">
+							<h5 class="no-margin">T3</h5>
+						</div>
+						<div class="col-md-7">
+							<strong><%- (typeof item!='undefined'?item.ClosingTime:'') %></strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

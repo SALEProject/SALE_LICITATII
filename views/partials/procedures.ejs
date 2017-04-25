@@ -1,0 +1,125 @@
+<%
+var procedure_prototype = '<li id="procedure-__ID__" class="procedure-item">' +
+		'<div class="row">' +
+			'<div class="col-md-5 toggle-procedure">' +
+				'<a class="procedure-name">__NAME__</a>' +
+				'<div class="procedure-details">' +
+					'<span class="procedure-location">__LOCATION__</span>&nbsp;|&nbsp;' +
+					'<span class="procedure-classification">__CLASSIFICATION__</span>&nbsp;|&nbsp;' +
+					'<span class="procedure-legislation">__LEGISLATION__</span>' +
+				'</div>' +
+			'</div>' +
+			'<div class="col-md-1">' +
+				'<span class="procedure-type __PROCEDURE_TYPE_LABEL__">__PROCEDURE_TYPE__</span>' +
+			'</div>' +
+			'<div class="col-md-1">' +
+				'<a class="procedure-favourite __IS_FAVOURITE__" title="__FAV_ANCHOR_TITLE__" data-id="__ID__" data-title="' + req.session.getTranslation('Add_favorite') + '" data-title-added="' + req.session.getTranslation('Remove_favorite') + '"></a>' +
+			'</div>' +
+			'<div class="col-md-1">' +
+				'<span class="procedure-status __STATUS__" title="__STATUS__"></span>' +
+			'</div>' +
+			'<div class="col-md-3">' +
+				'<p class="procedure-time">' + req.session.getTranslation('Launch') + '<span class="procedure-launch"></span></p>' +
+				'<p class="procedure-time">' + req.session.getTranslation('Clarifications_until') + '<span class="procedure-clarifications-deadline"></span></p>' +
+				'<p class="procedure-time">' + req.session.getTranslation('Submit_deadline') + '<span class="procedure-deadline"></span></p>' +
+			'</div>' +
+			'<div class="col-md-1">' +
+				'<a class="toggle-procedure collapse">&nbsp;</a>' +
+			'</div>' +
+			'<div class="col-md-12 procedure-expandable">' +
+				'<div class="row">' +
+					'<div class="col-md-5">' +
+						'<p class="procedure-description">__DESCRIPTION__</p>' +
+					'</div>' +
+					'<div class="col-md-6 procedure-offer-details">' +
+						'<div class="row">' +
+							'<div class="col-md-3">' +
+								'<p><strong>' + req.session.getTranslation('Clarifications') + '</strong></p>' +
+								'<p class="procedure-clarifications"></p>' +
+							'</div>' +
+							'<div class="col-md-4">' +
+								'<p><strong>' + req.session.getTranslation('Offers_submission') + '</strong></p>' +
+								'<p class="procedure-submission"></p>' +
+							'</div>' +
+							'<div class="col-md-5">' +
+								'<p><strong>' + req.session.getTranslation('Contracter') + '</strong></p>' +
+								'<p class="procedure-contracter">__ORGANIZATIONNAME__</p>' +
+							'</div>' +
+						'</div>' +
+						'<a class="view-procedure btn btn-default" data-id="__ID__">' + req.session.getTranslation('Auction_details') + '</a>' +
+					'</div>' +
+				'</div>' +
+			'</div>' +
+		'</div>' +
+	'</li>';
+%>
+
+<div class="tile m-b-10 data-container" id="procedures-container">
+	<div class="tile-title">
+		<h4 class="no-margin m-b-10"><%- req.session.getTranslation('Available_procedures') %></h4>
+		<br/>
+	</div>
+	<div class="tile-body">
+		<div class="list-filters">
+			<form id="procedure-filters" method="post">
+				<div class="row">
+					<div class="col-md-4 form-row">
+						<div class="widget-col">
+							<select name="ID_ContractType" id="filter-ID_ContractType" class="form-control">
+							  <option value=""><%- req.session.getTranslation('All_contract_types') %></option>
+							  <% _.each(req.session.contractTypes,function(ct) { %>
+							  <option value="<%= ct.ID %>"><%= req.session.getTranslation(ct.Name) %></option>
+							  <% }); %>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4 form-row">
+						<div class="widget-col">
+							<select name="ID_ProcedureType" id="filter-ID_ProcedureType" class="form-control">
+							  <option value=""><%- req.session.getTranslation('All_procedure_types') %></option>
+							  <% _.each(req.session.procedureTypes,function(pt) { %>
+							  <option value="<%= pt.ID %>"><%= req.session.getTranslation(pt.Name) %></option>
+							  <% }); %>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4 form-row">
+						<div class="widget-col">
+							<select name="ID_ProcedureCriterion" id="filter-ID_ProcedureCriterion" class="form-control">
+							  <option value=""><%- req.session.getTranslation('All_procedure_criteria') %></option>
+							  <% _.each(req.session.procedureCriteria,function(pc) { %>
+							  <option value="<%= pc.ID %>"><%= req.session.getTranslation(pc.Name) %></option>
+							  <% }); %>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-3 form-row">
+						<div class="widget-col">
+							<input type="hidden" name="ID_Cpv" id="filter-ID_Cpv" />
+						</div>
+					</div>
+					<div class="col-md-4 form-row">
+						<div class="widget-col">
+							<div class="input-group" id="filter-range">
+								<input type="text" class="form-control" name="start" id="filter-start" />
+								<span class="input-group-addon">to</span>
+								<input type="text" class="form-control" name="end" id="filter-end" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 form-row">
+						<div class="widget-col">
+							<input name="keyword" id="filter-keyword" type="text" class="form-control" placeholder="search..." />
+						</div>
+					</div>
+					<div class="col-md-2 form-row">
+						<button type="submit" class="btn btn-success" id="filter-procedures">Filtreaza</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="text-center padding-20 loader"><img src="/img/loader-white.gif"></div>
+		<ul class="procedures-list" id="procedures-list" data-prototype="<%= procedure_prototype %>"></ul>
+		<div class="clearfix"></div>
+	</div>
+</div>

@@ -1,0 +1,191 @@
+    <div class="content">
+	<div class="page-title">
+		<ul class="breadcrumb">
+			<li>
+				<a href="/admin"><i class="fa fa-home"></i></a>
+			</li>
+			<li>
+				<a href="/admin/assets" class="">Active</a>
+			</li>
+			<li>
+				<a href="/admin/assets/trade_parameters?asset=<%- req.param('asset') %>" class="active">Definire activ - Pasul <%- ((typeof asset.ID_InitialOrder!='undefined' && asset.ID_InitialOrder==0)?'3':'4') %></a>
+			</li>                    
+		</ul>
+	</div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="grid simple">
+            <div class="grid-title no-border">
+				<%- toolsService.getFlashMessage(req.flash()) %>
+			</div>
+            <div class="grid-body no-border">
+			<form class="form-no-horizontal-spacing" id="user-form" method="post" autocomplete="off">	
+					<div id="rootwizard" class="col-md-12">
+						<div class="form-wizard-steps">
+							<ul class="wizard-steps">
+								<li class="">
+									<a href="/admin/assets/edit/<%- typeof asset.ID!='undefined' ? asset.ID : '' %>">
+										<span class="step">1</span>
+										<span class="title">Activ</span>
+									</a>
+								</li>
+								<li class="" id="step-initial-order" <%- ((typeof asset.ID_InitialOrder!='undefined' && asset.ID_InitialOrder==0)?'style="display:none"':'') %>>
+									<a <%- typeof asset.ID!='undefined' ? 'href="/admin/orders/initial?asset='+asset.ID+'"' : '' %>>
+										<span class="step">2</span>
+										<span class="title">Ordin initiator</span>
+									</a>
+								</li>
+								<li class="">
+									<a <%- typeof asset.ID!='undefined' ? 'href="/admin/asset_schedules/schedules?asset='+asset.ID+'"' : '' %>>
+										<span class="step"><%- ((typeof asset.ID_InitialOrder!='undefined' && asset.ID_InitialOrder==0)?'2':'3') %></span>
+										<span class="title">Sedinta activ</span>
+									</a>
+								</li>
+								<li class="active">
+									<a <%- typeof asset.ID!='undefined' ? 'href="/admin/assets/trade_parameters?asset='+asset.ID+'"' : '' %>>
+										<span class="step"><%- ((typeof asset.ID_InitialOrder!='undefined' && asset.ID_InitialOrder==0)?'3':'4') %></span>
+										<span class="title">Parametri tranzactionare</span>
+									</a>
+								</li>
+								<li class="">
+									<a <%- typeof asset.ID!='undefined' ? 'href="/admin/clients/asset_clients?asset='+asset.ID+'"' : '' %>>
+										<span class="step"><%- ((typeof asset.ID_InitialOrder!='undefined' && asset.ID_InitialOrder==0)?'4':'5') %></span>
+										<span class="title">Clienti</span>
+									</a>
+								</li>
+								<li class="">
+									<a <%- typeof asset.ID!='undefined' ? 'href="/admin/documents/asset_documents?asset='+asset.ID+'"' : '' %>>
+										<span class="step"><%- ((typeof asset.ID_InitialOrder!='undefined' && asset.ID_InitialOrder==0)?'5':'6') %></span>
+										<span class="title">Documente</span>
+									</a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<br/><br/><br/>
+				<input type="hidden" id="ID_AssetSchedule" name="ID_AssetSchedule" value="<%- (typeof item.ID!='undefined' && item.ID) ? item.ID :  ((typeof item.ID_AssetSchedule!='undefined' && item.ID_AssetSchedule) ? item.ID_AssetSchedule : '') %>" />
+              <div class="row column-seperation">
+                <div class="col-md-12">
+                    <div class="row form-row">
+                      <div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label">Activ</label>
+							<div class="controls">
+								<% if (asset!=null) { %>
+									<input type="hidden" name="ID_Asset" id="ID_Asset" value="<%= asset.ID %>" />
+									<h4><%= req.session.getTranslation(asset.Name) %></h4>
+								<% } else { %>
+								<select name="ID_Asset" id="ID_Asset" class="select2 form-control">
+								  <% _.each(req.session.assets,function(asset) { %>
+								  <option value="<%= asset.ID %>" <%- ((typeof item.ID_Asset!='undefined' && item.ID_Asset==asset.ID)?'selected=""':'') %> /><%= req.session.getTranslation(asset.Name) %></option>
+								  <% }); %>
+								</select>
+								<% } %>
+							</div>
+						</div>
+                      </div>
+                    </div>
+					<br />
+                </div>
+              </div>
+              <div class="row column-seperation">
+                <div class="col-md-6">
+					<h4>Garantii</h4>
+					<div class="row form-row">
+						<div class="col-md-6">
+							<label class="form-label">Procent garantie la vanzare (%)</label>
+							<div class="controls">
+								<div class="col-md-6">
+									<input type="number" class="form-control" min="0" max="100" step="any" name="SellWarrantyPercent" id="SellWarrantyPercent" value="<%- (typeof item.SellWarrantyPercent!='undefined' ? item.SellWarrantyPercent : '') %>" />
+								</div>
+								<div class="col-md-6 no-padding">
+									<span class="muted">%</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Procent garantie la cumparare (%)</label>
+							<div class="controls">
+								<div class="col-md-6">
+									<input type="number" class="form-control" min="0" max="100" step="any" name="BuyWarrantyPercent" id="BuyWarrantyPercent" value="<%- (typeof item.BuyWarrantyPercent!='undefined' ? item.BuyWarrantyPercent : '') %>" />
+								</div>
+								<div class="col-md-6 no-padding">
+									<span class="muted">%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row form-row">
+						<div class="col-md-6">
+							<label class="form-label">Valoare garantie pe UM la vanzare (RON)</label>
+							<div class="controls">
+								<div class="col-md-8">
+									<input type="text" class="form-control numeric" name="SellWarrantyMU" id="SellWarrantyMU" value="<%- (typeof item.SellWarrantyMU!='undefined' ? item.SellWarrantyMU : '') %>" data-a-sep="." data-a-dec="," data-m-dec="2" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Valoare garantie pe UM la cumparare (RON)</label>
+							<div class="controls">
+								<div class="col-md-8">
+									<input type="text" class="form-control numeric" name="BuyWarrantyMU" id="BuyWarrantyMU" value="<%- (typeof item.BuyWarrantyMU!='undefined' ? item.BuyWarrantyMU : '') %>" data-a-sep="." data-a-dec="," data-m-dec="2" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row form-row">
+						<div class="col-md-6">
+							<label class="form-label">Parte fixa garantie la vanzare (RON)	</label>
+							<div class="controls">
+								<div class="col-md-8">
+									<input type="text" class="form-control numeric" name="SellWarrantyFixed" id="SellWarrantyFixed" value="<%- (typeof item.SellWarrantyFixed!='undefined' ? item.SellWarrantyFixed : '') %>" data-a-sep="." data-a-dec="," data-m-dec="2" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Parte fixa garantie la cumparare (RON)</label>
+							<div class="controls">
+								<div class="col-md-8">
+									<input type="text" class="form-control numeric" name="BuyWarrantyFixed" id="BuyWarrantyFixed" value="<%- (typeof item.BuyWarrantyFixed!='undefined' ? item.BuyWarrantyFixed : '') %>" data-a-sep="." data-a-dec="," data-m-dec="2" />
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="col-md-6">
+					<h4>Restrictii</h4>
+					<div class="row form-row">
+							  <% _.each(req.session.params,function(param) { %>
+					  <div class="col-md-12">
+							<div class="checkbox check-default" style="margin-top:10px">
+								<input id="<%- param.label %>" name="<%- param.label %>" type="checkbox" value="1" <% if(typeof item[param.label]!='undefined' && item[param.label]) { %>checked=""<% } %> />
+								<label for="<%- param.label %>"><%- param.name %></label>
+							</div>
+					  </div>
+							  <% }); %>
+					</div>
+					<div class="row form-row" id="DifferentialPriceText-holder" <% if(!typeof item.DifferentialPriceAllowed || !item.DifferentialPriceAllowed) { %>style="display:none" <% } %>>
+						<label class="form-label">Text pret diferential</label>
+						<div class="controls">
+							<div class="col-md-8">
+								<input type="text" class="form-control" name="DifferentialPriceText" id="DifferentialPriceText" value="<%- (typeof item.DifferentialPriceText!='undefined' ? item.DifferentialPriceText : '') %>" />
+							</div>
+						</div>
+					</div>
+                </div>
+              </div>              	
+				<div class="form-actions">
+					<div class="text-center">
+					  <a class="btn btn-white btn-cons" href="/admin/asset_schedules/schedules<%- typeof item.ID_Asset!='undefined' ? '?asset='+item.ID_Asset : '' %>">Inapoi</a>
+					  <a class="btn btn-grey btn-cons" href="/admin/assets">Renunta</a>
+					  <button class="btn btn-primary btn-cons" type="submit" name="submit" value="save"><i class="icon-ok"></i> Salveaza</button>
+					  <button class="btn btn-success btn-cons" type="submit" name="Validate" value="1"><i class="icon-ok"></i>Valideaza</button>
+					</div>
+				</div>
+			</form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

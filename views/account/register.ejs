@@ -1,0 +1,61 @@
+<div class="row login-container">
+	<div class="col-md-10 col-xs-10 text-center centered">
+		<img src="/img/logo-ue.png" />
+		<p class="text-black m-t-20 m-b-5"><%- req.session.getTranslation('Program_operational_sectorial') %></p>
+		<p class="text-black m-b-5"><%- req.session.getTranslation('Proiect_cofinantat') %></p>
+		<div class="text-center m-t-10 m-b-10"><img src="/img/logo-disponibil.png" /></div>
+	</div>
+	<div class="row no-margin">
+		<div class="col-md-8 col-md-offset-2 col-xs-4 p-r-5">
+			<div class="tile">
+				<div class="tile-title m-t-0 p-l-5">
+					<h4 class="bold"><%- req.session.getTranslation('Register') %></h4>
+				</div>
+        <form id="register-form" class="login-form" action="" method="post">
+          <div class="tiles-body">
+            <%- toolsService.getFlashMessage(req.flash()) %>
+            <div class="clearfix"></div>
+            <div class="row p-t-10 no-margin">
+              <div class="col-sm-12 col-xs-12 col-md-12 pull-left m-b-10 m-t-0">
+                <input type="text" name="username" id="username" class="form-control" autofocus="" placeholder="<%- req.session.getTranslation('User') %>" <% if(typeof submit != 'undefined') { %>value="<%- submit.username %>" disabled=""<% } %> />
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-12 pull-left m-b-10 m-t-0">
+                <input type="password" name="password" id="password" class="form-control" placeholder="<%- req.session.getTranslation('Password') %>" <% if(typeof submit != 'undefined') { %>value="<%- submit.password %>" disabled=""<% } %> />
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-12 pull-left m-b-10 m-t-0">
+                <input type="password" name="password_repeat" id="password_repeat" class="form-control" placeholder="<%- req.session.getTranslation('Repeat_password') %>" <% if(typeof submit != 'undefined') { %>value="<%- submit.password_repeat %>" disabled=""<% } %> />
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-12 pull-left m-b-10 m-t-0">
+                <input type="text" name="email" id="email" class="form-control" autofocus="" placeholder="<%- req.session.getTranslation('Email') %>" <% if(typeof submit != 'undefined') { %>value="<%- submit.email %>" disabled=""<% } %> />
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-12 pull-left m-b-10 m-t-0">
+                <input type="text" name="company_name" id="company_name" class="form-control" autofocus="" placeholder="<%- req.session.getTranslation('Company_name') %>" <% if(typeof submit != 'undefined') { %>value="<%- submit.company_name %>" disabled=""<% } %> />
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-12 pull-left m-b-10 m-t-0">
+                <input type="text" name="phone" id="phone" class="form-control" autofocus="" placeholder="<%- req.session.getTranslation('Phone') %>" <% if(typeof submit != 'undefined') { %>value="<%- submit.phone %>" disabled=""<% } %> />
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-12 pull-left m-b-10 m-t-0">
+                <input type="text" name="fax" id="fax" class="form-control" autofocus="" placeholder="<%- req.session.getTranslation('Fax') %>" <% if(typeof submit != 'undefined') { %>value="<%- submit.fax %>" disabled=""<% } %> />
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-12 pull-left m-b-10 m-t-0">
+                <input type="text" name="social_code" id="social_code" class="form-control" autofocus="" placeholder="<%- req.session.getTranslation('Social_code') %>" <% if(typeof submit != 'undefined') { %>value="<%- submit.social_code %>" disabled=""<% } %> />
+              </div>
+            </div>
+            <div class="row no-margin">
+              <div class="p-l-5 p-r-5">
+              </div>
+            </div>
+          </div>
+          <div class="p-t-10 p-b-5 p-l-5 p-r-5 text-center">
+            <button class="btn btn-primary btn-cons" type="submit">Login</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-5 text-center centered">
+		<p class="text-white m-t-20 m-b-10"><%- req.session.getTranslation('Informatii_fonduri_ue') %></p>
+		<p class="text-white m-b-20"><%- req.session.getTranslation('Continut_material') %></p>
+	</div>
+</div>

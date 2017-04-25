@@ -1,0 +1,78 @@
+    <div class="content">
+      <div class="page-title"> <i class="icon-custom-left"></i>
+      <h3><%- (req.param('id')?'Modificare':'Adaugare') %> Tip Procedura</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="grid simple">
+          <div class="grid-title no-border">
+            <%- toolsService.getFlashMessage(req.flash()) %>
+          </div>
+          <div class="grid-body no-border">
+            <form class="form-no-horizontal-spacing" id="user-form" method="post" autocomplete="off"> 
+              <div class="row column-seperation">
+                <div class="col-md-12">
+                  <h4>Informatii generale</h4>            
+                  <div class="row form-row">
+                    <div class="col-md-6">
+                      <label for="Name_RO">Nume RO</label>
+                      <div class="widget-col">
+                        <input name="Name_RO" id="Name_RO" type="text" class="form-control required max-length" value="<%- (typeof item.Name!='undefined' ? toolsService.getLangTranslation(item.Name,'RO') : typeof item.Name !='undefined' ? item.Name : '') %>" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Description_RO">Descriere RO</label>
+                      <div class="widget-col">
+                        <input name="Description_RO" id="Description_RO" type="text" class="form-control required max-length" value="<%- (typeof item.Description!='undefined' ? toolsService.getLangTranslation(item.Description,'RO') : typeof item.Description !='undefined' ? item.Description :'') %>" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row form-row">
+                    <div class="col-md-6">
+                      <label for="Name_EN">Nume EN</label>
+                      <div class="widget-col">
+                        <input name="Name_EN" id="Name_EN" type="text" class="form-control required max-length" value="<%- (typeof item.Name!='undefined' ? toolsService.getLangTranslation(item.Name,'EN') : typeof item.Name !='undefined' ? item.Name : '') %>" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Description_EN">Descriere EN</label>
+                      <div class="widget-col">
+                        <input name="Description_EN" id="Description_EN" type="text" class="form-control required max-length" value="<%- (typeof item.Description!='undefined' ? toolsService.getLangTranslation(item.Description,'EN') : typeof item.Description !='undefined' ? item.Description :'') %>" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row form-row">
+                    <div class="col-md-4">
+                      <label for="ValueThreshold">Valoare Prag / Conditie</label>
+                      <div class="widget-col">
+                        <input name="ValueThreshold" id="ValueThreshold" type="text" class="form-control required max-length" value="<%- (typeof item!='undefined'?item.ValueThreshold:'') %>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="ClarificationRequestsOffset">Termen Maxim Cerere Clarificari</label>
+                      <div class="widget-col">
+                        <input name="ClarificationRequestsOffset" id="ClarificationRequestsOffset" type="text" class="form-control required max-length" value="<%- (typeof item!='undefined'?item.ClarificationRequestsOffset:'') %>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="TendersReceiptOffset">Termen Maxim Depunere Oferte</label>
+                      <div class="widget-col">
+                        <input name="TendersReceiptOffset" id="TendersReceiptOffset" type="text" class="form-control required max-length" value="<%- (typeof item!='undefined'?item.TendersReceiptOffset:'') %>" />
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                </div>
+              </div>
+              <div class="form-actions">
+                <div class="pull-left">
+                  <button class="btn btn-primary btn-cons" type="submit"><i class="icon-ok"></i> Salveaza</button>
+                  <a class="btn btn-white btn-cons" href="/admin/procedure_types">Renunta</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

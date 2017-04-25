@@ -1,0 +1,403 @@
+<div class="tile m-b-10 data-container" id="procedure-form-container" style="display:none">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a id="form-1-link" href="#form-1" class="wizard-form-step" aria-controls="form-1" role="tab" data-step="1">Definirea necesitatii</a></li>
+				<li role="presentation"><a id="form-2-link" href="#form-2" class="wizard-form-step disabled" aria-controls="form-2" role="tab" data-step="2">Referat de necesitate</a></li>
+				<li role="presentation"><a id="form-3-link" href="#form-3" class="wizard-form-step disabled" aria-controls="form-3" role="tab" data-step="3">Nota de fundamentare</a></li>
+				<li role="presentation"><a id="form-4-link" href="#form-4" class="wizard-form-step disabled" aria-controls="form-4" role="tab" data-step="4">Fisa de date</a></li>
+				<li role="presentation"><a id="form-5-link" href="#form-5" class="wizard-form-step disabled" aria-controls="form-5" role="tab" data-step="5">CS</a></li>
+				<li role="presentation"><a id="form-6-link" href="#form-6" class="wizard-form-step disabled" aria-controls="form-6" role="tab" data-step="6">Lansare procedura</a></li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="form-1">
+					<form class="my-form" id="procedure-form-1" method="post" data-step="1">
+						<input type="hidden" name="ID" id="procedure-ID" />
+						<input type="hidden" name="SubmitTime" id="procedure-SubmitTime" />
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-Name" control-label">Nume necesitate</label>
+							</div>
+							<div class="col-md-6">
+								<div class="widget-col">
+									<input name="Name" id="procedure-Name" type="text" class="form-control required input-sm max-length" />
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-Description">Descriere necesitate</label>
+							</div>
+							<div class="col-md-6">
+								<div class="widget-col">
+									<textarea name="Description" id="procedure-Description" type="text" class="form-control input-sm required"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-Location">Locatie</label>
+							</div>
+							<div class="col-md-6">
+								<div class="widget-col">
+									<input name="Location" id="procedure-Location" type="text" class="form-control input-sm required" value="<%- req.session.userClient ? req.session.userClient.City : '' %>" />
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-Legislation">Legislatie</label>
+							</div>
+							<div class="col-md-6">
+								<div class="widget-col">
+									<select name="Legislation" id="procedure-Legislation" type="text" class="form-control input-sm required">
+									<% _.each(req.session.procedureLegislations,function(elm) { %>
+										<option value="<%- elm.Name %>"><%- elm.Name %></option>
+									<% }) %>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-Duration">Durata contract</label>
+							</div>
+							<div class="col-md-3">
+								<div class="widget-col">
+									<input name="Duration" id="procedure-Duration" type="text" class="form-control input-sm required numeric" data-a-sep="." data-a-dec="," data-m-dec="0" data-l-zero="deny" />
+								</div>
+							</div>
+							<div class="col-md-1">
+								<div class="widget-col">
+									<span class="muted">luni</span>
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-TotalValue">Valoare totala</label>
+							</div>
+							<div class="col-md-3">
+								<div class="widget-col">
+									<input name="TotalValue" id="procedure-TotalValue" type="text" class="form-control input-sm required numeric" data-a-sep="." data-a-dec="," data-m-dec="0" data-l-zero="deny" />
+								</div>
+							</div>
+							<div class="col-md-1">
+								<div class="widget-col">
+									<span class="muted">LEI</span>
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-ID_ContractType">Tip contract</label>
+							</div>
+							<div class="col-md-6">
+								<div class="controls">
+									<select name="ID_ContractType" id="procedure-ID_ContractType" class="form-control required input-sm">
+									  <option value="1">Furnizare</option>
+									  <option value="2">Lucrari</option>
+									  <option value="3">Servicii</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-ID_Procedure">Tip procedura</label>
+							</div>
+							<div class="col-md-6">
+								<div class="controls">
+									<select name="ID_ProcedureType" id="procedure-ID_ProcedureType" class="form-control input-sm required">
+									<% _.each(req.session.procedureTypes,function(elm) { %>
+										<option value="<%- elm.ID %>" id="procedure-type-option-<%- elm.ID %>"><%- req.session.getTranslation(elm.Name) %></option>
+									<% }) %>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-ID_ProcedureCriterion">Criteriu</label>
+							</div>
+							<div class="col-md-6">
+								<div class="controls">
+									<select name="ID_ProcedureCriterion" id="procedure-ID_ProcedureCriterion" class="form-control input-sm required">
+									  <option value="1">Economic</option>
+									  <option value="2">Tehnic</option>
+									  <option value="3">Tehnico-economic</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-3">
+								<label for="procedure-cpv">Clasificare</label>
+							</div>
+							<div class="col-md-6">
+								<div class="controls">
+									<input type="hidden" name="Classification" id="procedure-Classification" />
+									<input type="hidden" id="procedure-cpv" class="required" />
+									<ul id="procedure-cpvs-list"></ul>
+								</div>
+							</div>
+						</div>
+						<a id="toggle-optional-fields">Afiseaza campuri optionale</a>
+						<div id="optional-fields-holder" style="display:none">
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-TotalValue">Formulare</label>
+								</div>
+								<div class="col-md-6">
+									<div class="widget-col">
+										<textarea name="Forms" id="procedure-Forms" type="text" class="form-control input-sm" rows="4">(1) Formular 2 - Declaratie privind neincadrarea in situatiile prevazute la art. 180 din OUG nr. 34/2006 cu modificarile si completarile ulterioare Încadrarea în situatia prevazuta la art. 180 din Ordonanta de Urgenta nr. 34/2006 atrage excluderea ofertantului din procedura aplicata pentru atribuirea contractului de achizitie publica
+(2) Formular 3 - Declaratie privind neincadrarea in situatiile prevazute la art. 181 din OUG nr. 34/2006 cu modificarile si completarile ulterioare  În situatia în care din documentele solicitate reiese ca ofertantul se afla într-una din situatiile prevazute de art. 181 din OUG 34/2006, acesta va fi exclus de la procedura pentru atribuirea contractului de achizitie publica.
+(3) Certificat de atestare fiscala (bugetul consolidat general) din care sa reiasa ca ofertantul/candidatul nu are datorii scadente la nivelul lunii anterioare celei in care este prevazut termenul limita de depunere a ofertelor/candidaturilor  (4) Certificat de taxe si impozite locale (bugetele locale) di care sa reiasa ca ofertantul/candidatul nu are datorii scadente la nivelul lunii anterioare celei in care este prevazut termenul limita de depunere a ofertelor/candidaturilor
+(5) Formular 5 - Declaratie privind neincadrarea in situatiile prevazute la art. 691, se va completa de catre lider, asociat, subcontractor, sustinator tert;
+(6) Formular 6 - Certificat de participare la licitatie cu oferta independenta completat în conformitate cu Ordinul ANRMAP nr. 314/2010 privind punerea în aplicare a certificatului de participare la licitatii cu oferta independenta</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-EconomicCapacity">Capacitate economica</label>
+								</div>
+								<div class="col-md-6">
+									<div class="widget-col">
+										<textarea name="EconomicCapacity" id="procedure-EconomicCapacity" type="text" class="form-control input-sm" rows="4"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-TechnicalCapacity">Capacitate tehnica</label>
+								</div>
+								<div class="col-md-6">
+									<div class="widget-col">
+										<textarea name="TechnicalCapacity" id="procedure-TechnicalCapacity" type="text" class="form-control input-sm" rows="4"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-ClarificationRequestsDeadline">Termen cereri clarificari</label>
+								</div>
+								<div class="col-md-3">
+									<div class="widget-col">
+										<div class="input-group">
+											<input name="ClarificationRequestsDeadline" id="procedure-ClarificationRequestsDeadline" type="text" class="form-control input-sm" data-date-format="dd M yyyy" />
+											<span class="input-group-addon primary">
+												<i class="fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-TendersReceiptDeadline">Termen depuneri oferte</label>
+								</div>
+								<div class="col-md-3">
+									<div class="widget-col">
+										<div class="input-group">
+											<input name="TendersReceiptDeadline" id="procedure-TendersReceiptDeadline" type="text" class="form-control input-sm" />
+											<span class="input-group-addon primary">
+												<i class="fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-TendersOpeningDate">Data deschidere oferte</label>
+								</div>
+								<div class="col-md-3">
+									<div class="widget-col">
+										<div class="input-group">
+											<input name="TendersOpeningDate" id="procedure-TendersOpeningDate" type="text" class="form-control input-sm" data-date-format="dd M yyyy" />
+											<span class="input-group-addon primary">
+												<i class="fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-ContestationsSubmission">Cai de atac</label>
+								</div>
+								<div class="col-md-6">
+									<div class="widget-col">
+										<textarea name="ContestationsSubmission" id="procedure-ContestationsSubmission" type="text" class="form-control input-sm" rows="6">Consiliul National de Solutionare a Contestatiilor - Adresa postala:  Str. Stavropoleos, nr. 6, sector 3, Bucuresti , Localitatea:  Bucuresti, Cod postal:  030084, Romania, Tel. +40 213104641, Email: office@cnsc.ro, Fax: +40 213104642 / +40 218900745, Adresa internet (URL): http://www.cnsc.ro</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-OtherInformation">Alte informatii</label>
+								</div>
+								<div class="col-md-6">
+									<div class="widget-col">
+										<textarea name="OtherInformation" id="procedure-OtherInformation" type="text" class="form-control input-sm" rows="8"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row form-row">
+								<div class="col-md-3">
+									<label for="procedure-Necessity">Argumentarea necesitatii</label>
+								</div>
+								<div class="col-md-6">
+									<div class="widget-col">
+										<textarea name="Necessity" id="procedure-Necessity" type="text" class="form-control input-sm" rows="8"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row form-row">
+							<div class="col-md-6 col-md-offset-3">
+								<button class="btn btn-primary btn-cons form-submit" type="submit" name="submit" value="save" data-step="1">Mergi la pasul urmator <i class="fa fa-angle-right"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="form-2">
+					<form class="my-form" id="procedure-form-2" method="post" data-step="2">
+						<input type="hidden" name="ID_Form" class="procedure-form-id" />
+						<div class="text-center padding-20 loader"><img src="/img/loader-white.gif"></div>
+						<div class="form-content"></div>
+						<div class="row form-row">
+							<div class="col-md-6 col-md-offset-3">
+								<button class="btn btn-primary btn-cons form-submit" type="submit" name="submit" value="save" data-step="2">Mergi la pasul urmator <i class="fa fa-angle-right"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="form-3">
+					<form class="my-form" id="procedure-form-3" method="post" data-step="3">
+						<input type="hidden" name="ID_Form" class="procedure-form-id" />
+						<div class="text-center padding-20 loader"><img src="/img/loader-white.gif"></div>
+						<div class="form-content"></div>
+						<div class="row form-row">
+							<div class="col-md-6 col-md-offset-3">
+								<button class="btn btn-primary btn-cons form-submit" type="submit" name="submit" value="save" data-step="3">Mergi la pasul urmator <i class="fa fa-angle-right"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="form-4">
+					<form class="my-form" id="procedure-form-4" method="post" data-step="4">
+						<input type="hidden" name="ID_Form" class="procedure-form-id" />
+						<div class="text-center padding-20 loader"><img src="/img/loader-white.gif"></div>
+						<div class="form-content"></div>
+						<div class="row form-row">
+							<div class="col-md-6 col-md-offset-3">
+								<button class="btn btn-primary btn-cons form-submit" type="submit" name="submit" value="save" data-step="4">Mergi la pasul urmator <i class="fa fa-angle-right"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="form-5">
+					<form class="my-form" id="procedure-form-5" method="post" data-step="5">
+						<input type="hidden" name="ID_Form" class="procedure-form-id" />
+						<div class="text-center padding-20 loader"><img src="/img/loader-white.gif"></div>
+						<div class="form-content"></div>
+						<div class="row form-row">
+							<div class="col-md-6 col-md-offset-3">
+								<button class="btn btn-primary btn-cons form-submit" type="submit" name="submit" value="save" data-step="5">Mergi la pasul urmator <i class="fa fa-angle-right"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="form-6">
+						<div class="row procedure-details-holder procedure-item">
+							<div class="col-md-6">
+								<h5>Denumire</h5>
+								<h4 id="form-detail-name" class="procedure-name"></h4>
+								<br/>
+								<h5>Descriere</h5>
+								<p id="form-detail-description" class="procedure-description"></p>
+								<br/>
+                <form class="my-form" id="procedure-form-docs" method="post" data-step="6">
+                  <h5>Documente</h5>
+                  <div id="form-detail-documents" class="procedure-documents"></div>
+                  <div id="form-detail-upload" class="row">
+                    <div class="col-md-6">
+                      <div class="controls">
+                        <select name="ID_DocumentType" id="form-detail-upload-type" class="form-control input-sm">
+                          <% _.each(req.session.documentTypes,function(documentType) { %>
+                          <option value="<%= documentType.ID %>">
+                          <%= req.session.getTranslation(documentType.Name) %>
+                          </option>
+                          <% }); %>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="controls">
+                        <input type="file" id="Document" name="Document" />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+							</div>
+							<div class="col-md-5 col-md-offset-1">
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Tip procedura</h5>
+									</div>
+									<div class="col-md-8">
+										<span id="form-detail-type" class="procedure-type"></span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Locatie</h5>
+									</div>
+									<div class="col-md-9">
+										<span id="form-detail-location" class="procedure-location"></span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<h5>Orar</h5>
+									</div>
+									<div class="col-md-11 col-md-offset-1">
+										<p class="procedure-time"><%- req.session.getTranslation('Launch') %><span id="form-detail-launch" class="procedure-launch"></span></p>
+										<p class="procedure-time"><%- req.session.getTranslation('Clarifications_until') %><span id="form-detail-clarifications" class="procedure-clarifications"></span></p>
+										<p class="procedure-time"><%- req.session.getTranslation('Submit_deadline') %><span id="form-detail-deadline" class="procedure-deadline"></span></p>
+										<p class="procedure-time">Deschidere oferte<span id="form-detail-open-deadline" class="procedure-open-deadline"></span></p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<h5>Coduri CPV</h5>
+										<span id="form-detail-cpvs"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+          <form class="my-form" id="procedure-form-6" method="post" data-step="6">
+            <input type="hidden" name="ID_Form" class="procedure-form-id" />
+						<div class="row form-row">
+							<div class="col-md-6 col-md-offset-3">
+								<button class="btn btn-success btn-cons form-submit" type="submit" name="submit" value="save" data-step="6">Lanseaza procedura</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="tab-footer">
+					<div class="row" id="generated-files-container">
+						<div class="col-md-2">
+							Fisiere generate:
+						</div>
+						<div class="col-md-10">
+							<div class="text-center padding-20 loader"><img src="/img/loader-white.gif"></div>
+							<div id="procedure-documents-download"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+</div>

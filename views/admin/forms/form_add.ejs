@@ -1,0 +1,77 @@
+			<div class="content">
+	<div class="page-title">
+		<ul class="breadcrumb">
+			<li>
+				<a href="/admin"><i class="fa fa-home"></i></a>
+			</li>
+			<li>
+				<a href="/admin/forms" class="">Formulare</a>
+			</li>
+			<li>
+				<a href="/admin/forms/<%- req.param('id') ? 'edit/'+req.param('id') : 'add' %>" class="active"><%- (req.param('id')?'Modificare':'Adaugare') %> formulare</a>
+			</li>
+		</ul>
+	</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="grid simple">
+						<div class="grid-title no-border">
+							<%- toolsService.getFlashMessage(req.flash()) %>
+						</div>
+						<div class="grid-body no-border">
+							<form class="form-no-horizontal-spacing" id="user-form" method="post" autocomplete="off" enctype="multipart/form-data">   
+								<div class="row column-seperation">
+									<div class="col-md-12">
+										<h4>Informatii generale</h4>            
+										<div class="row form-row">
+											<div class="col-md-7">
+												<label for="Name">Nume</label>
+												<div class="widget-col">
+													<input name="Name" id="Name" type="text" class="form-control required max-length" value="<%- (typeof item.Name!='undefined'?item.Name:'') %>" />
+												</div>
+											</div>											
+											<div class="col-md-3">
+												<label for="Step">Pas</label>
+												<div class="widget-col">
+													<input name="Step" id="Step" type="text" class="form-control required max-length" value="<%- (typeof item.Step!='undefined'?item.Step:'') %>" />
+												</div>
+											</div>
+											<div class="col-md-2">
+												<label for="isActive">Activ</label>
+												<div class="checkbox check-default">
+													<input id="isActive" name="isActive" type="checkbox" value="1" <% if(typeof item.isActive!='undefined' && item.isActive) { %>checked=""<% } %> />
+													<label for="isActive">Activ pe site</label>
+												</div>
+											</div>
+										</div>
+										<div class="row form-row">										
+									     	<div class="col-md-12">
+												<label for="Template" class="pull-left">Template</label><% if(typeof item.Template!='undefined') { %><span class="bold pull-left m-l-10"><%- item.Template %></span><% } %>
+												<div class="widget-col clearfix">
+													<input type="file" class="form-control" id="Template" name="Template" />
+												</div>
+									        </div>							        
+										</div>										
+										<div class="row form-row">										
+									     	<div class="col-md-12">
+												<label for="ExportTemplate" class="pull-left">Export Template</label><% if(typeof item.ExportTemplate!='undefined') { %><span class="bold pull-left m-l-10"><%- item.ExportTemplate %></span><% } %>
+												<div class="widget-col clearfix">
+													<input type="file" class="form-control" id="ExportTemplate" name="ExportTemplate" />
+												</div>
+									        </div>							        
+										</div>										
+										<br />
+									</div>									
+								</div>
+								<div class="form-actions">
+									<div class="pull-left">
+										<button class="btn btn-primary btn-cons" type="submit"><i class="icon-ok"></i> Salveaza</button>
+										<a class="btn btn-white btn-cons" href="/admin/forms">Renunta</a>
+									</div>
+								</div>
+							</form>
+						</div>						
+					</div>
+				</div>
+			</div>

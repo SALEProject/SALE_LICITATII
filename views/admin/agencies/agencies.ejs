@@ -1,0 +1,50 @@
+    <div class="content">
+	<div class="page-title">
+		<ul class="breadcrumb">
+			<li>
+				<a href="/admin"><i class="fa fa-home"></i></a>
+			</li>
+			<li>
+				<a href="/admin/agencies" class="active">Organizatii</a>
+			</li>
+		</ul>
+	</div>
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="grid simple">
+			<div class="grid-title no-border">
+				<%- toolsService.getFlashMessage(req.flash()) %>
+				<a href="/admin/agencies/add" class="btn btn-info"><i class="fa fa-plus-circle"></i>&nbsp;<%- req.session.getTranslation('Organization_Add') %></a>
+			</div>
+			<div class="grid-body no-border">
+				<table class="table table-hover table-condensed admin-table" id="example-table">
+					<thead>
+						<tr>
+							<th style="width:10%"><%- req.session.getTranslation('Code') %></th>
+							<th style="width:22%"><%- req.session.getTranslation('Name') %></th>
+							<th style="width:10%"><%- req.session.getTranslation('Status') %></th>
+							<th style="width:15%"><%- req.session.getTranslation('Tax_Code') %></th>
+							<th style="width:15%"><%- req.session.getTranslation('Registration_Number') %></th>
+							<th style="width:5%">&nbsp;</th>
+							<th style="width:5%">&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if(items.length>0) { _.each(items,function(item) { %>
+						<tr>
+							<td class="v-align-middle"><%= item.Code %></td>
+							<td class="v-align-middle bold"><%= item.AgencyName %></td>
+							<td class="v-align-middle"><span class="muted"><%- item.Status=='active' ? 'Activ' : item.Status=='inactive' ? 'Inactiv' : item.Status=='suspended' ? 'Suspended' : '' %></span></td>
+							<td class="v-align-middle"><span class="muted"><%= item.FiscalCode %></span></td>
+							<td class="v-align-middle"><span class="muted"><%= item.RegisterCode %></span></td>
+							<td><a href="/admin/agencies/edit/<%= item.ID %>" class="action-icon btn btn-small btn-success" title="<%- req.session.getTranslation('Modify') %>"><i class="fa fa-edit"></i></a></td>
+							<td><a href="/admin/agencies/delete/<%- item.ID %>" title="<%- req.session.getTranslation('Delete') %>" class="action-icon delete-confirm btn btn-small btn-danger"><i class="fa fa-trash-o"></i></a></td>
+						</tr>
+						<% }); } %>
+					</tbody>
+				</table>
+			</div>
+          </div>
+        </div>
+      </div>
+    </div>

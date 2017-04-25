@@ -1,0 +1,26 @@
+<%
+var favourite_procedures_prototype = '<li id="favourite-procedure-__ID__" class="procedure-item">' +
+		'<div class="procedure-actions">' +
+			'<a class="view-procedure" data-id="__ID__"><span class="procedure-name">__NAME__</span><span class="procedure-status __STATUS__" title="__STATUS__">&nbsp;</span></a>' +
+			'<a class="reset-procedure" data-id="__ID__" href="/procedure/favouritereset/__ID__">' + req.session.getTranslation('Remove') + '</a>' +
+		'</div>' +
+	'</li>';
+%>
+<div class="procedures" id="favourite-procedures-container">
+	<div class="tile m-b-10 collapsed">
+		<div class="tile-title">
+			<div class="controller">
+				<a href="" class="collapse pull-right m-l-15">&nbsp;</a>
+			</div>
+			<h4 id="favourite-procedures-title" class="m-t-0"><%- req.session.getTranslation('Followed_procedures') %></h3>
+		</div>
+		<div class="tile-body">
+			<div class="text-center padding-20 loader"><img src="/img/loader-white.gif"></div>
+			<div id="favourite-procedures-scroller" class="scroller" data-height="300px">
+				<ul class="procedures-list" id="favourite-procedures-list" data-prototype="<%= favourite_procedures_prototype %>">
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
